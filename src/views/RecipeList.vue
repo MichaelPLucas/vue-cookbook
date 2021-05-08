@@ -4,7 +4,7 @@
       My Recipes
     </h2>
     <ul>
-      <RecipePreview v-for="recipe in recipes"
+      <RecipePreview v-for="recipe in getAllRecipes"
                      :recipe="recipe"
                      :key="recipe.id" />
     </ul>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import RecipePreview from '../components/RecipePreview';
 
 export default {
@@ -19,8 +20,8 @@ export default {
   components: {
     RecipePreview
   },
-  props: {
-
+  computed: {
+    ...mapGetters(['getAllRecipes'])
   }
 }
 </script>

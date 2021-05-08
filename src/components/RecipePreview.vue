@@ -11,12 +11,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'RecipePreview',
-  computed: {
-    ...mapGetters(['recipe'])
+  props: {
+    recipe: {
+      type: Object,
+      required: true
+    }
   }
 };
 </script>

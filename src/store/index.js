@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   ADD_RECIPE,
@@ -12,7 +13,15 @@ import {
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: [],
+  state: [{
+    id: uuidv4(),
+    title: 'Test',
+    description: 'This is a test recipe',
+    image: '',
+    ingredients: [],
+    steps: [],
+    tags: []
+  }],
   getters: {
     getAllRecipes: state => {
       return state;
@@ -23,6 +32,7 @@ export default new Vuex.Store({
   },
   mutations: {
     [ADD_RECIPE] (state, recipe) {
+      recipe.id = uuidv4();
       state.push(recipe);
     },
     [DELETE_RECIPE] (state, id) {
