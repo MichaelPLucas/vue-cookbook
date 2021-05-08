@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/MichaelPLucas/vue-cookbook/issues"
   },
-  "homepage": "https://github.com/MichaelPLucas/vue-cookbook#readme"
+  "homepage": "https://github.com/MichaelPLucas/vue-cookbook#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  }
 }
