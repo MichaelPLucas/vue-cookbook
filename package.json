@@ -27,6 +27,7 @@
   "homepage": "https://github.com/MichaelPLucas/vue-cookbook#readme",
   "dependencies": {
     "vue": "^2.6.12",
-    "vue-router": "^3.5.1"
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
   }
 }
