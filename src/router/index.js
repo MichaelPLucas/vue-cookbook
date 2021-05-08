@@ -7,7 +7,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/List')
+      component: () => import('@/views/RecipeList')
     },
     {
       name: 'add-form',
