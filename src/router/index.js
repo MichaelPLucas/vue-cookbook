@@ -16,7 +16,7 @@ export default new Router({
     },
     {
       name: 'detail-view',
-      path: '/recipe/:slug',
+      path: '/recipe/:id',
       component: () => import('@/views/DetailView')
     }
   ]
