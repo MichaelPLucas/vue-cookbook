@@ -1,8 +1,19 @@
 <template>
   <div>
-    <h2>
-      My Recipes
-    </h2>
+    <div class="row">
+      <div class="col">
+        <h2>
+          My Recipes
+        </h2>
+      </div>
+      <div class="col text-end">
+        <router-link :to="{ name: 'add-form' }">
+          <h2>
+            +
+          </h2>
+        </router-link>
+      </div>
+    </div>
     <ul>
       <RecipePreview v-for="recipe in getAllRecipes"
                      :recipe="recipe"
