@@ -120,9 +120,9 @@ export default {
         title: this.title,
         description: this.description,
         image: this.image,
-        ingredients: this.ingredients,
-        steps: this.steps,
-        tags: this.tags
+        ingredients: Object.values(this.ingredients),
+        steps: Object.values(this.steps),
+        tags: Object.values(this.tags)
       });
       router.push({ name: 'home' });
     }
