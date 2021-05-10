@@ -17,10 +17,10 @@ export default new Vuex.Store({
     id: uuidv4(),
     title: 'Test',
     description: 'This is a test recipe',
-    image: '',
-    ingredients: [],
-    steps: [],
-    tags: []
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
+    ingredients: ['Test 1', 'Test 2'],
+    steps: ['Test 1', 'Test 2', 'Test 3'],
+    tags: ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']
   }],
   getters: {
     getAllRecipes: state => {
