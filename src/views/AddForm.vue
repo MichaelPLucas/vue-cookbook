@@ -29,12 +29,15 @@
       </div>
       <div class="row">
         <ul>
-          <li v-for="ingredient in Object.keys(ingredients)"
-              :key="ingredient"
+          <li v-for="(ingredient, index) in Object.keys(ingredients)"
+              :key="index"
               class="list-group-item">
             <div class="mb-3">
-              <label for={{ingredient}} class="form-label">{{'Ingredient ' + String(parseInt(ingredient.slice(-1)) + 1)}}</label>
-              <input id={{ingredient}} type="text" class="form-control" v-model=ingredients[ingredient] :required="ingredient == 'ingredient0'">
+              <div class="row">
+                <label for={{ingredient}} class="col-11 form-label">{{'Ingredient ' + String(index + 1)}}</label>
+                <button class="btn col-1" v-on:click="removeIngredient(ingredient)">X</button>
+              </div>
+              <input id={{ingredient}} type="text" class="form-control" v-model=ingredients[ingredient] required>
             </div>
           </li>
         </ul>
@@ -51,12 +54,15 @@
       </div>
       <div class="row">
         <ul>
-          <li v-for="step in Object.keys(steps)"
-              :key="step"
+          <li v-for="(step, index) in Object.keys(steps)"
+              :key="index"
               class="list-group-item">
             <div class="mb-3">
-              <label for={{step}} class="form-label">{{'Step ' + String(parseInt(step.slice(-1)) + 1)}}</label>
-              <input id={{step}} type="text" class="form-control" v-model=steps[step] :required="step == 'step0'">
+              <div class="row">
+                <label for={{step}} class="col-11 form-label">{{'Step ' + String(index + 1)}}</label>
+                <button class="btn col-1" v-on:click="removeStep(step)">X</button>
+              </div>
+              <input id={{step}} type="text" class="form-control" v-model=steps[step] required>
             </div>
           </li>
         </ul>
@@ -76,14 +82,15 @@
           <li v-for="tag in Object.keys(tags)"
               :key="tag"
               class="list-group-item">
-            <div class="mb-3">
-              <input id={{tag}} type="text" class="form-control" v-model=tags[tag]>
+            <div class="row mb-3">
+              <input id={{tag}} type="text" class="col-11" v-model=tags[tag] required>
+              <button class="btn col-1" v-on:click="removeTag(tag)">X</button>
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <button class="btn btn-primary" type="submit" v-on:click="createRecipe">Add Recipe</button>
+    <button class="btn btn-dark" type="submit" v-on:click="createRecipe">Add Recipe</button>
   </form>
 </template>
 
@@ -92,6 +99,10 @@ import Vue from 'vue';
 import store from '@/store';
 import { ADD_RECIPE } from '@/store/mutation.types';
 import router from '@/router';
+
+let ingredientCount = 1;
+let stepCount = 1;
+let tagCount = 0;
 
 export default {
   name: 'AddForm',
@@ -105,17 +116,33 @@ export default {
   methods: {
     addNewIngredient: function(event) {
       event.preventDefault();
-      Vue.set(this.ingredients, 'ingredient' + Object.keys(this.ingredients).length, '');
+      Vue.set(this.ingredients, 'ingredient' + ingredientCount++, '');
     },
     addNewStep: function(event) {
       event.preventDefault();
-      Vue.set(this.steps, 'step' + Object.keys(this.steps).length, '');
+      Vue.set(this.steps, 'step' + stepCount++, '');
     },
     addNewTag: function(event) {
       event.preventDefault();
-      Vue.set(this.tags, 'tag' + Object.keys(this.tags).length, '');
+      Vue.set(this.tags, 'tag' + tagCount++, '');
+    },
+    removeIngredient: function(ingredient, event) {
+      if (event) event.preventDefault();
+      Vue.delete(this.ingredients, ingredient);
+    },
+    removeStep: function(step, event) {
+      if (event) event.preventDefault();
+      Vue.delete(this.steps, step);
+    },
+    removeTag: function(tag, event) {
+      if (event) event.preventDefault();
+      Vue.delete(this.tags, tag);
     },
     createRecipe: function(event) {
+      if (Object.keys(this.ingredients) == 0 ||
+          Object.keys(this.steps) == 0)
+        alert('Recipes must have a non-zero number of ingredients and steps.');
+
       store.commit(ADD_RECIPE, {
         title: this.title,
         description: this.description,
@@ -124,6 +151,7 @@ export default {
         steps: Object.values(this.steps),
         tags: Object.values(this.tags)
       });
+
       router.push({ name: 'home' });
     }
   }

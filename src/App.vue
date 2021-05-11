@@ -18,11 +18,12 @@ export default {
 
 <style>
 #app {
-  background: #AAF;
+  background: #999;
 }
 
 .container {
   background: #FFF;
   height: 100%;
+  padding-top: 20px;
 }
 </style>

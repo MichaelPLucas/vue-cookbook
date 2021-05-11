@@ -17,7 +17,7 @@
       <ul>
         <li v-for="tag in recipe.tags"
               :key="tag"
-              class="badge bg-primary"
+              class="badge bg-dark"
               style="margin-right:10px">
           <h6>{{tag}}</h6>
         </li>
@@ -62,7 +62,6 @@ export default {
   name: 'DetailView',
   computed: {
     recipe: function() {
-      console.log(this.getRecipeById(this.$route.params.id));
       return this.getRecipeById(this.$route.params.id);
     },
     ...mapGetters(['getRecipeById'])
